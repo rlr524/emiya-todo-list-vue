@@ -15,9 +15,13 @@ export const useItemStore = defineStore("itemStore", () => {
   async function fetchItems() {
     loading.value = true;
     error.value = null;
+    var environment = "dev";
+    var response: Response = await fetch("http://localhost:8080/api/v1/items")
 
     try {
-      const response = await fetch("http://suga:8080/api/v1/items/mine");
+      if (environment != "dev") {
+        response = await fetch("http://suga:8080/api/v1/items/mine");
+      }
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
