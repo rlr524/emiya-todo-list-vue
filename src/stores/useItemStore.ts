@@ -15,12 +15,9 @@ export const useItemStore = defineStore('itemStore', () => {
   async function fetchItems() {
     loading.value = true
     error.value = null
-    // var environment = 'test'
-    // //var response: Response = await fetch("http://localhost:8080/api/v1/items")
-    // var response: Response = await fetch('http://suga:8080/api/v1/items')
 
     try {
-      const response: Response = await fetch('http://suga:8080/api/v1/items')
+      const response: Response = await fetch(`${import.meta.env.VITE_API_URL}items`)
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
